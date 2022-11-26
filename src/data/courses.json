@@ -1,0 +1,24 @@
+{
+  "courses": [
+    {
+      "id": "1",
+      "title": "Course1",
+      "about": "React"
+    },
+    {
+      "id": "2",
+      "title": "Course2",
+      "about": "HTML"
+    },
+    {
+      "id": "3",
+      "title": "Course3",
+      "about": "CSS"
+    },
+    {
+      "id": "4",
+      "title": "Course4",
+      "about": "JavaScript"
+    }
+  ]
+}

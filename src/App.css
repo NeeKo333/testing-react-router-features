@@ -1,0 +1,19 @@
+.App {
+  text-align: center;
+}
+
+nav {
+  background-color: beige;
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+}
+nav a {
+  font-size: 30px;
+  text-decoration: none;
+}
+
+nav a.active {
+  color: red;
+  text-decoration: none;
+}

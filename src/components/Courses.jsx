@@ -6,7 +6,7 @@ const Courses = () => {
   const [dataArr, setDataArr] = useState([]);
   async function getCourses() {
     const response = await fetch(
-      "https://api.jsonbin.io/v3/b/6382625a0ee72e368cf96c8b",
+      "https://api.jsonbin.io/v3/b/63854fbd7966e84526ceba8c",
       {
         method: "GET",
         headers: {

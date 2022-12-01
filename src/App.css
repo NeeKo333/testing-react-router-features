@@ -17,3 +17,16 @@ nav a.active {
   color: red;
   text-decoration: none;
 }
+
+.coursesList {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+.coursesList a {
+  text-decoration: none;
+}
+.coursesInfo {
+  display: flex;
+  flex-direction: column;
+}

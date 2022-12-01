@@ -1,5 +1,5 @@
 const NotFound = () => {
-  return <h1>Not Found:(</h1>;
+  return <p style={{ fontSize: 40 }}>Not Found:(</p>;
 };
 
 export default NotFound;

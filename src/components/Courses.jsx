@@ -5,8 +5,9 @@ import { useLocation } from "react-router-dom";
 const Courses = () => {
   const location = useLocation();
   const queryString = require("query-string");
-  const parsed = queryString.parse(location.search);
+  const parsed = queryString.parse(location.search).sort;
   const [dataArr, setDataArr] = useState([]);
+  const [sortedArr, setSortedArr] = useState("");
   const navigator = useNavigate();
   async function getCourses() {
     const response = await fetch(
@@ -21,47 +22,35 @@ const Courses = () => {
     );
     const data = await response.json();
     setDataArr(data.record.courses);
+    return data.record.courses;
   }
   useEffect(() => {
-    getCourses();
+    getCourses().then((data) => setSortedArr(sortingCourses(data, parsed)));
   }, []);
-  let sortedBy = "";
-  function sortingCourses() {
-    if (
-      Object.keys(parsed).length > 0 &&
-      (parsed.sort === "title" ||
-        parsed.sort === "about" ||
-        parsed.sort === "id")
-    ) {
-      const sortField = parsed.sort;
-      sortedBy = `Courses sorted by ${sortField}`;
-      dataArr.sort((a, b) => {
-        if (a[sortField] > b[sortField]) return 1;
-        if (a[sortField] < b[sortField]) return -1;
-        return 0;
-      });
-    } else if (
-      Object.keys(parsed).length > 0 &&
-      (parsed.sort !== "title" ||
-        parsed.sort !== "about" ||
-        parsed.sort !== "id")
-    ) {
-      navigator("/courses", { relative: "path" });
+  function sortingCourses(dataArr, key) {
+    const keys = ["title", "about", "id"];
+    if (!keys.includes(key)) {
+      navigator("/courses", { relative: "route" });
+      return dataArr;
     }
-    return dataArr.map((el) => (
-      <Link to={el.about.toLowerCase()} key={el.id}>
-        {el.title}
-      </Link>
-    ));
+    const newArr = !key
+      ? [...dataArr].sort((a, b) => (a[key] > b[key] ? 1 : -1))
+      : [...dataArr];
+
+    return newArr;
   }
-  sortingCourses();
+
   return (
     <>
       <h3 className="coursesList">
         {dataArr.length > 0 ? (
           <div className="coursesInfo">
-            {sortedBy}
-            {sortingCourses()}
+            <p>{parsed ? `Sorted by ${parsed}` : ""}</p>
+            {sortedArr.map((el) => (
+              <Link to={el.about.toLowerCase()} key={el.id}>
+                {el.title}
+              </Link>
+            ))}
           </div>
         ) : (
           "Courses are loading..."

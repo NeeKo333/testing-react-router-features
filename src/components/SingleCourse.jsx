@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-const SingleCourse = ({ slug, text }) => {
+const SingleCourse = () => {
   const urlParams = useParams();
   const navigator = useNavigate();
   const urlSlug = urlParams.slug;
